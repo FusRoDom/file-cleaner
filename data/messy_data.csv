@@ -1,0 +1,8 @@
+Name,Age,Email,Signup Date,Score
+ Alice ,25,alice@example.com,2021-01-01,88.5
+Bob,,bob@example.com,2021/02/01,92.0
+Charlie,35,,"March 3, 2021",
+Alice ,25,alice@example.com,2021-01-01,88.5
+,40,eve@example.com,2021-05-20,75.0
+Eve,,eve@example.com,,82.0
+Bob,30,bob@example.com,2021-02-01,92.0
