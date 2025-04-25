@@ -12,5 +12,8 @@ Takes in a CSV file and performs various data cleaning operations
 
 ## Usage
 
+- If input file is not given, will prompt user to select a file
+
 ```bash
-python cleaner.py data/messy_data.csv --output_file data/cleaned_data.csv
+python cleaner.py --input_file data/messy_data.csv --output_file data/cleaned_data.csv
+

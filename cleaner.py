@@ -8,14 +8,37 @@ import tkinter as tk
 from tkinter import filedialog
 from datetime import datetime
 
-def clean_csv(input_file, output_file):
+def clean_csv(input_file, output_file="blank"):
 	df = pd.read_csv(input_file)
 
 	print("Initial shape:", df.shape)
 	print(df.head())
 
 	# Drop duplicates
-	df = df.drop_duplicates()
+	# print("Would you like to drop duplicates (y/n)? ")
+	selection = input("Would you like to drop duplicates (y/n)? ")
+	while (selection == "y"):
+		print("Input the number with your preferred operation:")
+		print("1 - Remove duplicate rows")
+		print("2 - Remove rows with duplicates in a column")
+		selection = input()
+
+		if (selection == "1"):
+			# Drop rows with full duplicates across columns
+			df = df.drop_duplicates()
+		elif (selection == "2"):
+			# Offer choice of column
+			# Drop rows of matching column types
+			print("The columns available are:")
+			for name in df.columns:
+				print(name)
+			selection = input("Which would you like to drop duplicates from?")
+			df = df.drop_duplicates(selection)
+
+
+		selection = input("Do you have more duplicates to drop (y/n)? ")
+
+
 
 	# Strip whitespace from strings
 	# df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
@@ -29,9 +52,11 @@ def clean_csv(input_file, output_file):
 	# 	df[col].fillna("Unknown", inplace=True)
 
 	# Save cleaned file
-	# timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-	# cleaned_filename = output_file or f"cleaned_{timestamp}.csv"
-	# df.to_csv(cleaned_filename, index=False)
+	# if (output_file == "blank"):
+	# 	timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+	# 	cleaned_filename = output_file or f"cleaned_{timestamp}.csv"
+	# 	df.to_csv(cleaned_filename, index=False)
+
 
 	# print(f"Cleaned data saved to {cleaned_filename}")
 	print(df.head())
@@ -43,6 +68,8 @@ if __name__ == "__main__":
 
 	print(len(sys.argv))
 
+	# Check for arguments
+	# Use filedialog if nothing was passed via command line
 	if (len(sys.argv) > 1):		
 		#parse arguments
 		parser = argparse.ArgumentParser(description="Clean a CSV file")
@@ -59,4 +86,4 @@ if __name__ == "__main__":
 
 		file_path = filedialog.askopenfilename()
 
-		clean_csv(file_path, file_path)
+		clean_csv(file_path)
