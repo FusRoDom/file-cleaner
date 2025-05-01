@@ -12,7 +12,16 @@ def clean_csv(input_file, output_file="blank"):
 	df = pd.read_csv(input_file)
 
 	print("Initial shape:", df.shape)
-	print(df.head())
+	print(df)
+
+	####################
+	# Strip whitespace #
+	####################
+	# Stripping first to make sure
+	# duplicate rows are caught
+	df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
+	df.columns = df.columns.str.strip()
+	print("Whitespace stripped")
 
 	###################
 	# Drop duplicates #
@@ -46,23 +55,16 @@ def clean_csv(input_file, output_file="blank"):
 		df = df.drop_duplicates()
 		print("Duplicate rows dropped")
 
-	####################
-	# Strip whitespace #
-	####################
-	df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
-	df.columns = df.columns.str.strip()
-	print("Whitespace stripped")
-
 	#######################
 	# Fill missing values #
 	#######################
-	# Fill numbers with average (change this to something else)
+	# Fill numbers with average (change this to something else?)
 	# for col in df.select_dtypes(include=['float', 'int']).columns:
-	# 	df[col].fillna(df[col].median(), inplace=True)
+	# 	df[col].fillna(df[col].median())
 
 	# Fill anything else with Unknown as a string
-	# for col in df.select_dtypes(include=['object']).columns:
-	# 	df[col].fillna("Unknown", inplace=True)
+	for col in df.select_dtypes(include=['object']).columns:
+		df[col] = df[col].fillna("Unknown")
 
 	#####################
 	# Save cleaned file #
@@ -76,7 +78,7 @@ def clean_csv(input_file, output_file="blank"):
 	# print(f"Cleaned data saved to {cleaned_filename}")
 
 	print("New csv:")
-	print(df.head())
+	print(df)
 
 if __name__ == "__main__":
 
