@@ -1,0 +1,18 @@
+Name,Age,Join Date,Email,Department
+Judy,26.0,Unknown,judy@example.com,Engineering
+Alice,25.0,2020-01-15,alice@example.com,Sales
+Ivan,34.0,2019-12-31,ivan@example.com,HR
+Oscar,,2023-02-28,oscar@example.com,Marketing
+Charlie,,2021-05-30,charlie@example.com,HR
+Heidi,,2022-01-01,heidi@example.com,Sales
+Peggy,35.0,Unknown,peggy@example.com,Finance
+Bob,30.0,2019-07-23,bob@example.com,Engineering
+Diana,22.0,2022-11-11,diana@example.com,Marketing
+Frank,31.0,2018-04-22,frank@example.com,Finance
+Eve,29.0,2020-03-10,eve@example.com,Engineering
+Grace,28.0,2021-08-08,grace@example.com,HR
+Sybil,27.0,2019-03-17,sybil@example.com,Legal
+Diana,22.0,2022-11-11,Unknown,Marketing
+Trent,32.0,2022-09-09,trent@example.com,Unknown
+Ivan,34.0,2019-12-31,Unknown,HR
+Mallory,40.0,2017-06-15,mallory@example.com,Legal

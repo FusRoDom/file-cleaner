@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import filedialog
 from datetime import datetime
 
-def clean_csv(input_file, output_file="blank"):
+def clean_csv(input_file, output_file="blank.csv"):
 	df = pd.read_csv(input_file)
 
 	print("Initial shape:", df.shape)
@@ -66,19 +66,37 @@ def clean_csv(input_file, output_file="blank"):
 	for col in df.select_dtypes(include=['object']).columns:
 		df[col] = df[col].fillna("Unknown")
 
+	# Show new file
+	print("New shape:", df.shape)
+	print(df)
+
 	#####################
 	# Save cleaned file #
 	#####################
 	# Mark new filename with time and save
-	# if (output_file == "blank"):
-	# 	timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-	# 	cleaned_filename = output_file or f"cleaned_{timestamp}.csv"
-	# 	df.to_csv(cleaned_filename, index=False)
+	if (output_file == "blank.csv"):
+		selection = input("Would you like to save the new file (y/n)?")
 
-	# print(f"Cleaned data saved to {cleaned_filename}")
+		while (selection != "n" and selection != "y"):
+				selection = input("Wrong. Would you like to save the new file (y/n)?")
+			
+		if (selection == "y"):
+			cleaned_filename = input("Please give a name for the file: ")
+			timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-	print("New csv:")
-	print(df)
+			if (cleaned_filename == ""):
+				print("No name entered, defaulting to cleaned_[datetime].csv")
+				cleaned_filename = f"cleaned_{timestamp}.csv"
+			
+			df.to_csv(cleaned_filename, index=False)
+	else:
+		# Runs if name was passed in command line
+		timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+		cleaned_filename = output_file or f"cleaned_{timestamp}.csv"
+		df.to_csv(cleaned_filename, index=False)
+
+
+	print("Cleaned data saved to ", cleaned_filename)
 
 if __name__ == "__main__":
 
